@@ -1,0 +1,162 @@
+<?xml version="1.0" encoding="iso-8859-3"?>
+<!DOCTYPE ROOT SYSTEM "FrmWrk_Servlet.dtd">
+<ROOT>
+	<SERVLET Name="afficherK7List" Class="framework.action.ActionDatabase" Target="/web/k7/page.jsp" TargetError="/web/k7/page.jsp">
+		<BEAN Name="beanK7List" Class="framework.beandata.BeanFindList" Scope="session">
+			<PARAM Name="crt_beanK7List" Index="0" Type="INT" InOut="IN"/>
+			<QUERY Type="STORED_PROCEDURE" ParameterCount="1">EXEC DBO.RechercherFilmGenre ?</QUERY>
+		</BEAN>
+	</SERVLET>
+	<SERVLET Name="afficherDvdList" Class="framework.action.ActionDatabase" Target="/web/dvd/page.jsp" TargetError="/web/dvd/page.jsp">
+		<BEAN Name="beanDvdList" Class="framework.beandata.BeanFindList" Scope="session">
+			<PARAM Name="crt_beanDvdList" Index="0" Type="INT" InOut="IN"/>
+			<QUERY Type="STORED_PROCEDURE" ParameterCount="1">EXEC DBO.RechercherFilmGenre ?</QUERY>
+		</BEAN>
+	</SERVLET>
+	<SERVLET Name="afficherHomeList" Class="framework.action.ActionDatabase" Target="/web/home/page.jsp" TargetError="/web/home/page.jsp">
+		<BEAN Name="beanHomeList" Class="framework.beandata.BeanFindList" Service="videofuture.home.list.service.SrvHomeList" Scope="session">
+			<PARAM Name="crt_beanHomeList" Index="0" Type="INT" InOut="IN"/>
+			<QUERY Type="STORED_PROCEDURE" ParameterCount="1">EXEC DBO.RechercherFilmGenre ?</QUERY>
+		</BEAN>
+	</SERVLET>
+	<SERVLET Name="afficherSelectionList" Class="framework.action.ActionDatabase" Target="/web/selection/page.jsp" TargetError="/web/selection/page.jsp">
+		<BEAN Name="beanSelectionList" Class="framework.beandata.BeanFindList" Scope="session">
+			<PARAM Name="list" Index="0" Type="CURSOR" InOut="OUT" Class="framework.convoyeur.CvrList"/>
+			<PARAM Name="crt_titre" Index="0" Type="STRING" InOut="IN"/>
+			<PARAM Name="crt_population" Index="1" Type="STRING" InOut="IN"/>
+			<PARAM Name="crt_duree" Index="2" Type="INT" InOut="IN"/>
+			<PARAM Name="crt_annee" Index="3" Type="INT" InOut="IN"/>
+			<PARAM Name="crt_resume" Index="4" Type="STRING" InOut="IN"/>
+			<PARAM Name="crt_client" Index="5" Type="INT" InOut="IN"/>
+			<QUERY Type="STORED_PROCEDURE" ParameterCount="6">EXEC DBO.RechercherCritereFilm ?, ?, ?, ?, ?, ?</QUERY>
+		</BEAN>
+	</SERVLET>
+	<SERVLET Name="afficherGenreList" Class="framework.action.ActionDatabase" Target="/web/selection/page.jsp" TargetError="/web/selection/page.jsp">
+		<BEAN Name="beanSelectionList" Class="framework.beandata.BeanFindList" Scope="session">
+			<PARAM Name="crt_client" Index="0" Type="INT" InOut="IN"/>
+			<QUERY Type="STORED_PROCEDURE" ParameterCount="1">EXEC DBO.RechercherGenre ?</QUERY>
+		</BEAN>
+	</SERVLET>
+	<SERVLET Name="afficherPopUpList" Class="framework.action.ActionDatabase" Target="/web/popup/afficherfilm/page.jsp" TargetError="/web/popup/afficherfilm/page.jsp">
+		<BEAN Name="beanPopUpFilm" Class="framework.beandata.BeanFindData" Scope="request">
+			<PARAM Name="id_film" Index="0" Type="INT" InOut="IN"/>
+			<QUERY Type="STORED_PROCEDURE" ParameterCount="1">EXEC DBO.RechercherFilm ?</QUERY>
+		</BEAN>
+		<BEAN Name="beanPopUpEditeur" Class="framework.beandata.BeanFindData" Scope="request">
+			<PARAM Name="id_film" Index="0" Type="INT" InOut="IN"/>
+			<QUERY Type="STORED_PROCEDURE" ParameterCount="1">EXEC DBO.RechercherFilmEditeur ?</QUERY>
+		</BEAN>
+		<BEAN Name="beanPopUpActeur" Class="framework.beandata.BeanFindList" Scope="request">
+			<PARAM Name="id_film" Index="0" Type="INT" InOut="IN"/>
+			<QUERY Type="STORED_PROCEDURE" ParameterCount="1">EXEC DBO.RechercherFilmListActeur ?</QUERY>
+		</BEAN>
+		<BEAN Name="beanPopUpLangue" Class="framework.beandata.BeanFindList" Scope="request">
+			<PARAM Name="id_film" Index="0" Type="INT" InOut="IN"/>
+			<QUERY Type="STORED_PROCEDURE" ParameterCount="1">EXEC DBO.RechercherFilmListLangue ?</QUERY>
+		</BEAN>
+		<BEAN Name="beanPopUpBandeSon" Class="framework.beandata.BeanFindList" Scope="request">
+			<PARAM Name="id_film" Index="0" Type="INT" InOut="IN"/>
+			<QUERY Type="STORED_PROCEDURE" ParameterCount="1">EXEC DBO.RechercherFilmListBandeSon ?</QUERY>
+		</BEAN>
+		<BEAN Name="beanPopUpSousTitre" Class="framework.beandata.BeanFindList" Scope="request">
+			<PARAM Name="id_film" Index="0" Type="INT" InOut="IN"/>
+			<QUERY Type="STORED_PROCEDURE" ParameterCount="1">EXEC DBO.RechercherFilmListSousTitre ?</QUERY>
+		</BEAN>
+		<BEAN Name="beanFilmLocation" Class="framework.beandata.BeanFindList" Scope="request">
+			<PARAM Name="id_film" Index="0" Type="INT" InOut="IN"/>
+			<QUERY Type="STORED_PROCEDURE" ParameterCount="1">EXEC DBO.RechercherFilmLocation ?</QUERY>
+		</BEAN>
+		<BEAN Name="beanFilmLocationClient" Class="framework.beandata.BeanFindList" Scope="request">
+			<PARAM Name="id_film" Index="0" Type="INT" InOut="IN"/>
+			<PARAM Name="id_client" Index="1" Type="INT" InOut="IN"/>
+			<QUERY Type="STORED_PROCEDURE" ParameterCount="2">EXEC DBO.RechercherFilmLocationClient ?, ?</QUERY>
+		</BEAN>
+	</SERVLET>
+	<SERVLET Name="authenfication" Class="framework.action.ActionDatabase" Target="#RequestPage" TargetError="#RequestPage" >
+		<BEAN Name="beanAuthenfication" Class="framework.beandata.BeanFindData" Scope="session">
+			<PARAM Name="login" Index="0" Type="STRING" InOut="IN"/>
+			<PARAM Name="password" Index="1" Type="STRING" InOut="IN"/>
+			<QUERY Type="STORED_PROCEDURE" ParameterCount="2">EXEC DBO.RechercherUserAuthentifier ?, ?</QUERY>
+		</BEAN>
+		<BEAN Name="beanListLocation" Class="framework.beandata.BeanFindList" Scope="session">
+			<PARAM Name="ID_CLIENT" Index="0" Type="INT" InOut="IN" Bean="beanAuthenfication"/>
+			<QUERY Type="STORED_PROCEDURE" ParameterCount="1">EXEC DBO.RechercherListFilmLocation ?</QUERY>
+		</BEAN>
+		<BEAN Name="beanListUser" Class="framework.beandata.BeanFindList" Scope="request">
+			<PARAM Name="ID_CLIENT" Index="0" Type="INT" InOut="IN" Bean="beanAuthenfication"/>
+			<QUERY Type="STORED_PROCEDURE" ParameterCount="1">EXEC DBO.RechercherListAdminUser ?</QUERY>
+		</BEAN>
+	</SERVLET>
+	<SERVLET Name="ajouterPanier" Class="videofuture.panier.action.actionAjouterPanier" Target="/web/popup/confirmerAjoutPanier/page.jsp" TargetError="/web/popup/confirmerAjoutPanier/page.jsp" >
+		<BEAN Name="beanPanier" Class="framework.beandata.BeanFindList" Scope="session">
+			<PARAM Name="id_client" Index="0" Type="INT" InOut="IN"/>
+			<PARAM Name="ID_CLIENT" Index="0" Type="INT" InOut="IN" Bean="beanAuthenfication"/>
+			<PARAM Name="id_film" Index="1" Type="INT" InOut="IN"/>
+			<QUERY Type="STORED_PROCEDURE" ParameterCount="2">EXEC DBO.AjouterLocationFilm ?, ?</QUERY>
+		</BEAN>
+		<BEAN Name="beanListLocation" Class="framework.beandata.BeanFindList" Scope="session">
+			<PARAM Name="id_client" Index="0" Type="INT" InOut="IN"/>
+			<QUERY Type="STORED_PROCEDURE" ParameterCount="1">EXEC DBO.RechercherListFilmLocation ?</QUERY>
+		</BEAN>
+	</SERVLET>
+	<SERVLET Name="supprimerPanierFilm" Class="framework.action.ActionDatabase" Target="/web/popup/confirmerAjoutPanier/page.jsp" TargetError="/web/popup/confirmerAjoutPanier/page.jsp" >
+		<BEAN Name="beanDelPanier" Class="framework.beandata.BeanFindList" Scope="request">
+			<PARAM Name="id_client" Index="0" Type="INT" InOut="IN"/>
+			<PARAM Name="ID_CLIENT" Index="0" Type="INT" InOut="IN" Bean="beanAuthenfication"/>
+			<PARAM Name="id_film" Index="1" Type="INT" InOut="IN"/>
+			<QUERY Type="STORED_PROCEDURE" ParameterCount="2">EXEC DBO.SupprimerLocationFilm ?, ?</QUERY>
+		</BEAN>
+		<BEAN Name="beanListLocation" Class="framework.beandata.BeanFindList" Scope="session">
+			<PARAM Name="id_client" Index="0" Type="INT" InOut="IN"/>
+			<PARAM Name="ID_CLIENT" Index="0" Type="INT" InOut="IN" Bean="beanAuthenfication"/>
+			<QUERY Type="STORED_PROCEDURE" ParameterCount="1">EXEC DBO.RechercherListFilmLocation ?</QUERY>
+		</BEAN>
+	</SERVLET>
+	<SERVLET Name="rechercherUserAuthentification" Class="framework.action.ActionDatabase" Target="/web/user/page.jsp" TargetError="/web/user/page.jsp" >
+		<BEAN Name="beanAuthenfication" Class="framework.beandata.BeanFindData" Scope="session">
+			<PARAM Name="ID_CLIENT" Index="0" Type="INT" InOut="IN" Bean="beanAuthenfication"/>
+			<QUERY Type="STORED_PROCEDURE" ParameterCount="1">EXEC DBO.RechercherUser ?</QUERY>
+		</BEAN>
+		<BEAN Name="beanListUser" Class="framework.beandata.BeanFindList" Scope="request">
+			<PARAM Name="ID_CLIENT" Index="0" Type="INT" InOut="IN" Bean="beanAuthenfication"/>
+			<QUERY Type="STORED_PROCEDURE" ParameterCount="1">EXEC DBO.RechercherListAdminUser ?</QUERY>
+		</BEAN>
+	</SERVLET>
+	<SERVLET Name="afficherPopupUser" Class="framework.action.ActionDatabase" Target="/web/popup/afficherUser/page.jsp" TargetError="/web/popup/afficherUser/page.jsp" >
+		<BEAN Name="beanUser" Class="framework.beandata.BeanFindData" Scope="request">
+			<PARAM Name="id_client" Index="0" Type="INT" InOut="IN"/>
+			<QUERY Type="STORED_PROCEDURE" ParameterCount="1">EXEC DBO.RechercherUser ?</QUERY>
+		</BEAN>
+	</SERVLET>
+	<SERVLET Name="modifierUserAuthentification" Class="framework.action.ActionDatabase" Target="#RequestPage" TargetError="#RequestPage" >
+		<BEAN Name="bean" Class="framework.beandata.BeanFindList" Scope="request">
+			<PARAM Name="user_id" Index="0" Type="INT" InOut="IN"/>
+			<PARAM Name="user_login" Index="1" Type="STRING" InOut="IN"/>
+			<PARAM Name="user_password" Index="2" Type="STRING" InOut="IN"/>
+			<PARAM Name="user_nom" Index="3" Type="STRING" InOut="IN"/>
+			<PARAM Name="user_prenom" Index="4" Type="STRING" InOut="IN"/>
+			<PARAM Name="user_adresse1" Index="5" Type="STRING" InOut="IN"/>
+			<PARAM Name="user_adresse2" Index="6" Type="STRING" InOut="IN"/>
+			<PARAM Name="user_codepostal" Index="7" Type="STRING" InOut="IN"/>
+			<PARAM Name="user_ville" Index="8" Type="STRING" InOut="IN"/>
+			<PARAM Name="user_pays" Index="9" Type="STRING" InOut="IN"/>
+			<PARAM Name="user_email" Index="10" Type="STRING" InOut="IN"/>
+			<PARAM Name="user_touspublic" Index="11" Type="INT" InOut="IN" Default="0"/>
+			<PARAM Name="user_enfant" Index="12" Type="INT" InOut="IN" Default="0"/>
+			<PARAM Name="user_adulte" Index="13" Type="INT" InOut="IN" Default="0"/>
+			<QUERY Type="STORED_PROCEDURE" ParameterCount="14">EXEC DBO.ModifierUser ?,?,?,?,?,?,?,?,?,?,?,?,?,?</QUERY>
+		</BEAN>
+		<BEAN Name="beanAuthenfication" Class="framework.beandata.BeanFindData" Scope="session">
+			<PARAM Name="ID_CLIENT" Index="0" Type="INT" InOut="IN" Bean="beanAuthenfication"/>
+			<QUERY Type="STORED_PROCEDURE" ParameterCount="1">EXEC DBO.RechercherUser ?</QUERY>
+		</BEAN>
+		<BEAN Name="beanUser" Class="framework.beandata.BeanFindData" Scope="request">
+			<PARAM Name="user_id" Index="0" Type="INT" InOut="IN"/>
+			<QUERY Type="STORED_PROCEDURE" ParameterCount="1">EXEC DBO.RechercherUser ?</QUERY>
+		</BEAN>
+		<BEAN Name="beanListUser" Class="framework.beandata.BeanFindList" Scope="request">
+			<PARAM Name="user_id" Index="0" Type="INT" InOut="IN"/>
+			<QUERY Type="STORED_PROCEDURE" ParameterCount="1">EXEC DBO.RechercherListAdminUser ?</QUERY>
+		</BEAN>
+	</SERVLET>
+</ROOT>

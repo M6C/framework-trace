@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="iso-8859-1"?>
+
+<ROOT>
+	<MENU Name="HOME" Text="Home" Target="/videofuture?event=afficherHomeList" Level="1" styleTD="" styleFONT="" styleA=""/>
+	<MENU Name="DVD" Text="Dvd" Target="/videofuture?event=afficherDvdList" Level="1" styleTD="" styleFONT="" styleA=""/>
+	<MENU Name="K7" Text="K7" Target="/videofuture?event=afficherK7List" Level="1" styleTD="" styleFONT="" styleA=""/>
+	<MENU Name="SELECT" Text="Selection" Target="/videofuture?event=afficherSelectionList" Level="1" styleTD="" styleFONT="" styleA=""/>
+	<MENU Name="USER" Text="Utilisateur" Target="/videofuture?event=rechercherUserAuthentification" Level="1" styleTD="" styleFONT="" styleA=""/>
+</ROOT>
