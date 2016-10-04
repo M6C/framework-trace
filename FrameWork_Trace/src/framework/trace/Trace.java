@@ -43,6 +43,10 @@ public class Trace {
   {
     Trace_WARNING( getTrace(obj) );
   }
+  public static void WARNING( Object parent, Object obj )
+  {
+    Trace_WARNING( getTrace(parent, obj) );
+  }
   protected static void Trace_OUT(String str) {
     if (str.endsWith("\r\n")) System.out.print(str);
     else                      System.out.println(str);
