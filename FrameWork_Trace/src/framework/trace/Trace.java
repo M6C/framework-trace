@@ -79,12 +79,15 @@ public class Trace {
     str.append(" MSG:");
     if (obj==null)
       msg = "null";
-    else if (obj instanceof Exception)
-      msg = "\r\n"+UtilTrace.formatTrace((Exception)obj);
-    else if (obj instanceof Throwable)
-      msg = ((Throwable)obj).getMessage();
-    else
-      msg = obj.toString();
+    else {
+    	if (obj instanceof Throwable) {
+    		msg = ((Throwable)obj).getMessage();
+	    	if (obj instanceof Exception)
+		      msg += "\r\n"+UtilTrace.formatTrace((Exception)obj);
+    	}
+	    else
+	      msg = obj.toString();
+    }
     str.append(msg);
     return str.toString();
   }
